@@ -1,14 +1,14 @@
 /* Optional: Makes the sample page fill the window. */
-html, body {
+html, body, .container {
     height: 100%;
     margin: 0;
     padding: 0;
 }
 
 h1 {
-	margin-top: 5px;
-	margin-left: 5px;
-	margin-bottom: 10px;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-bottom: 10px;
 }
 /* Always set the map height explicitly to define the size of the div
 * element that contains the map. */
@@ -18,23 +18,42 @@ h1 {
 }
 
 #header {
-	height: 50px;
+    height: 50px;
 }
 
 #list {
-	background-color: white;
-	height: 80%;
-	width: 400px;
-	z-index: 3;
-	position: absolute; /*newly added*/
+    background-color: white;
+    height: 80%;
+    width: 400px;
+    z-index: 3;
+    position: absolute; /*newly added*/
     left: 20px; /*newly added*/
-    top: 70px;/*newly added*/
+    top: 100px;/*newly added*/
 }
 
 .container {
-  display: flex; /* or inline-flex */
-  flex-direction: column;
-  flex-wrap: nowrap;
-  /*flex-flow: column nowrap;*/
-  align-content: stretch;
+    display: flex; /* or inline-flex */
+    flex-direction: column;
+    flex-wrap: nowrap;
+    /*flex-flow: column nowrap;*/
+    align-content: stretch;
+}
+
+@media all and (max-width: 767px) {
+
+  #map {
+    height: 40%;
+    margin: 0px;
+  }
+
+  #list {
+    background-color: white;
+    height: 80%;
+    width: 100%;
+    z-index: 3;
+    position: absolute; /*newly added*/
+    left: 0px; /*newly added*/
+    top: 40%;/*newly added*/
+}
+
 }
