@@ -5,6 +5,7 @@ var zoom = 14;
 var mapTypeId = 'terrain';
 var mobileZoom = 12;
 var desktopZoom = 14;
+var apiKey = "AIzaSyBPOJXFTbJh9jn8Mg09QENs5BaEXNgDpw0";
 
 // center map solution at:
 // http://stackoverflow.com/questions/8792676/center-google-maps-v3-on-browser-resize-responsive
