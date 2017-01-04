@@ -50,6 +50,8 @@ var initLocations = [
         url: "https://www.immediateclinic.com/capitol-hill-urgent-care"
     }
 ];
+var markers = [];
+var infoWindows = [];
 
 // center map solution at:
 // http://stackoverflow.com/questions/8792676/center-google-maps-v3-on-browser-resize-responsive
@@ -98,12 +100,60 @@ function initMap() {
 
     // add markers to the map
     initLocations.forEach( function( loc ) {
-        var marker = new google.maps.Marker({
-            position: loc.coordinates
+
+        var marker = new google.maps.Marker( {
+            animation: google.maps.Animation.DROP,
+            position: loc.coordinates,
+            title: loc.name,
+            map: map
         });
-        marker.setMap(map);
+
+        markers.push(marker);
+
+        // Add info window to marker
+        var contentString = "<div class='content'>" +
+            "<h4><a target='_blank' href='" + loc.url + "'>" + loc.name + "</a></h4>" +
+            "<p>" + loc.address + "</p>" +
+            "</div>"
+
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+
+        infoWindows.push(infowindow);
+
+        // bouncing marker
+        // https://developers.google.com/maps/documentation/javascript/markers
+        marker.addListener('click', function( ) {
+            this.setAnimation(google.maps.Animation.BOUNCE);
+        });
+
+        marker.addListener('click', function() {
+            infowindow.open(map, this);
+        });
     });
+
+    // stop marker animation and close infowindows on any click
+    document.onclick = function() {
+        markers.forEach( function ( marker ) {
+            marker.setAnimation(null);
+        });
+        infoWindows.forEach( function( infowindow ) {
+            infowindow.close(map, this);
+        });
+    };
 };
+
+
+
+
+
+
+
+
+
+
+
 
 
 

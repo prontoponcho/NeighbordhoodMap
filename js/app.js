@@ -22,7 +22,6 @@ var ViewModel = function() {
     this.filterSexualHealth = function() {
         self.locations().forEach( function( loc ) {
             if (loc.category() !== 'sexual health') {
-                console.log(loc.category());
                 loc.viewable(false);
             } else {
                 loc.viewable(true);
@@ -33,12 +32,17 @@ var ViewModel = function() {
     this.filterUrgentCare = function() {
         self.locations().forEach( function( loc ) {
             if (loc.category() !== 'urgent care') {
-                console.log(loc.category());
                 loc.viewable(false);
             } else {
                 loc.viewable(true);
             }
         });
+    };
+
+    this.filterAllCategories = function() {
+        self.locations().forEach( function ( loc ) {
+            loc.viewable(true);
+        })
     };
 
 };

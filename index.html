@@ -18,15 +18,15 @@
                 Filter <span class="glyphicon glyphicon-filter"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li data-bind="click: filterSexualHealth">sexual health</li>
-                    <li data-bind="click: filterUrgentCare">urgent care</li>
+                    <li><a href="#" data-bind="click: filterAllCategories">all categories</a></li>
+                    <li><a href="#" data-bind="click: filterSexualHealth">sexual health</a></li>
+                    <li><a href="#" data-bind="click: filterUrgentCare">urgent care</a></li>
                 </ul>
             </div>
         </div>
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
             <div class="panel panel-default">
                 <!-- ko foreach: locations -->
-<!--                 <div data-bind="visible: viewable"> -->
                     <div class="panel-heading" role="tab" data-bind="attr:{id: 'heading' + $index()}, visible: viewable">
                         <h4 class="panel-title">
                         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="false" data-bind="text: name, attr: {href: '#collapse' + $index(), 'aria-controls': 'collapse' + $index()}">
@@ -39,7 +39,6 @@
                             <a data-bind="attr: {href: url}" target="_blank">website</a>
                         </div>
                     </div>
-<!--                 </div> -->
                 <!-- /ko -->
             </div>
 
@@ -51,11 +50,13 @@
 
     <script src="js/libs/jquery.min.js"></script>
     <script src="js/libs/knockout-3.2.0.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/map.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPOJXFTbJh9jn8Mg09QENs5BaEXNgDpw0&callback=initMap"
+     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPOJXFTbJh9jn8Mg09QENs5BaEXNgDpw0&callback=initMap"
     async defer></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
 
 
 </body>
