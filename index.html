@@ -15,18 +15,20 @@
         <div id="list-header">List Header</div>
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
             <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingOne">
+                <!-- ko foreach: locations -->
+                <div class="panel-heading" role="tab" data-bind="attr:{id: 'heading' + $index()}">
                     <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                      Location One
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="false" data-bind="text: name, attr: {href: '#collapse' + $index(), 'aria-controls': 'collapse' + $index()}">
                     </a>
                     </h4>
                 </div>
-                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-collapse collapse" role="tabpanel" data-bind="attr: {id: 'collapse' + $index(), 'aria-labelledby': 'heading' + $index()}">
                     <div class="panel-body">
-                    More information about the location.
+                        <p data-bind="text: 'category: ' + category()"></p>
+                        <a data-bind="attr: {href: url}" target="_blank">website</a>
                     </div>
                 </div>
+                <!-- /ko -->
             </div>
 
         </div>
@@ -36,7 +38,9 @@
     <div id="map"></div>
 
     <script src="js/libs/jquery.min.js"></script>
+    <script src="js/libs/knockout-3.2.0.js"></script>
     <script type="text/javascript" src="js/map.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPOJXFTbJh9jn8Mg09QENs5BaEXNgDpw0&callback=initMap"
     async defer></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>

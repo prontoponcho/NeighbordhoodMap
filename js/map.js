@@ -6,7 +6,7 @@ var mapTypeId = 'terrain';
 var mobileZoom = 12;
 var desktopZoom = 14;
 var apiKey = "AIzaSyBPOJXFTbJh9jn8Mg09QENs5BaEXNgDpw0";
-var locations = [
+var initLocations = [
     {
         category: "sexual health",
         name: "Gay City",
@@ -97,7 +97,7 @@ function initMap() {
     });
 
     // add markers to the map
-    $.each(locations, function(idx, loc) {
+    initLocations.forEach( function( loc ) {
         var marker = new google.maps.Marker({
             position: loc.coordinates
         });
