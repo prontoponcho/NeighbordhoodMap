@@ -12,22 +12,34 @@
     <div id="header"><h1>Header</h1></div>
 
     <div id="list" class="container">
-        <div id="list-header">List Header</div>
+        <div id="list-header">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Filter <span class="glyphicon glyphicon-filter"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li data-bind="click: filterSexualHealth">sexual health</li>
+                    <li data-bind="click: filterUrgentCare">urgent care</li>
+                </ul>
+            </div>
+        </div>
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
             <div class="panel panel-default">
                 <!-- ko foreach: locations -->
-                <div class="panel-heading" role="tab" data-bind="attr:{id: 'heading' + $index()}">
-                    <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="false" data-bind="text: name, attr: {href: '#collapse' + $index(), 'aria-controls': 'collapse' + $index()}">
-                    </a>
-                    </h4>
-                </div>
-                <div class="panel-collapse collapse" role="tabpanel" data-bind="attr: {id: 'collapse' + $index(), 'aria-labelledby': 'heading' + $index()}">
-                    <div class="panel-body">
-                        <p data-bind="text: 'category: ' + category()"></p>
-                        <a data-bind="attr: {href: url}" target="_blank">website</a>
+<!--                 <div data-bind="visible: viewable"> -->
+                    <div class="panel-heading" role="tab" data-bind="attr:{id: 'heading' + $index()}, visible: viewable">
+                        <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="false" data-bind="text: name, attr: {href: '#collapse' + $index(), 'aria-controls': 'collapse' + $index()}">
+                        </a>
+                        </h4>
                     </div>
-                </div>
+                    <div class="panel-collapse collapse" role="tabpanel" data-bind="attr: {id: 'collapse' + $index(), 'aria-labelledby': 'heading' + $index()}, visible: viewable">
+                        <div class="panel-body">
+                            <p data-bind="text: 'category: ' + category()"></p>
+                            <a data-bind="attr: {href: url}" target="_blank">website</a>
+                        </div>
+                    </div>
+<!--                 </div> -->
                 <!-- /ko -->
             </div>
 
