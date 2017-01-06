@@ -1,5 +1,7 @@
 var map = map || {};
-var initLocations = initLocations || {};
+var markers = markers || [];
+var infoWindows = infoWindows || [];
+var initLocations = initLocations || [];
 
 var Location = function(data) {
     this.category = ko.observable(data.category);

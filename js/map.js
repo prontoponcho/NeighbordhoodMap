@@ -1,4 +1,7 @@
 var map;
+var markers = markers || [];
+var infoWindows = infoWindows || [];
+var currentMarker;
 var lat = 47.6278632;
 var lng = -122.3333217;
 var zoom = 14;
@@ -50,8 +53,8 @@ var initLocations = [
         url: "https://www.immediateclinic.com/capitol-hill-urgent-care"
     }
 ];
-var markers = [];
-var infoWindows = [];
+
+
 
 // center map solution at:
 // http://stackoverflow.com/questions/8792676/center-google-maps-v3-on-browser-resize-responsive
@@ -60,7 +63,59 @@ function calculateCenter() {
     center = map.getCenter();
 };
 
+// add markers, infowindows, & eventListeners to the map
+var addMarkers = function() {
+
+    initLocations.forEach( function( loc ) {
+
+        var marker = new google.maps.Marker( {
+            animation: google.maps.Animation.DROP,
+            position: loc.coordinates,
+            title: loc.name,
+            map: map
+        });
+
+        markers.push(marker);
+
+        // Add info window to marker
+        var contentString = "<div class='content'>" +
+            "<h4><a target='_blank' href='" + loc.url + "'>" + loc.name + "</a></h4>" +
+            "<p>" + loc.address + "</p>" +
+            "</div>";
+
+        marker.infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+
+        // add bouncing marker animation
+        // https://developers.google.com/maps/documentation/javascript/markers
+        marker.addListener('click', function( ) {
+
+            // stop all other markers from bouncing
+            // close all other marker infowindows
+            markers.forEach( function ( marker ) {
+                marker.setAnimation(null);
+                marker.infowindow.close();
+            });
+
+            // set this clicked marker to bounce
+            this.setAnimation(google.maps.Animation.BOUNCE);
+
+            // open infoWindow of this clicked marker
+            this.infowindow.open(map, this);
+
+            // stop marker bouncing when its infowindow is closed
+            google.maps.event.addListener(this.infowindow, 'closeclick', function() {
+                marker.setAnimation(null);
+            });
+
+            setTimeout(function () { marker.setAnimation(null); }, 2866);
+        });
+    });
+};
+
 function initMap() {
+
     map = new google.maps.Map( document.getElementById('map'), {
         center: {lat: lat, lng: lng},
         zoom: zoom,
@@ -68,19 +123,19 @@ function initMap() {
         scrollwheel: false,
         draggable: true,
         mapTypeControl: true,
-          mapTypeControlOptions: {
-              style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-              position: google.maps.ControlPosition.RIGHT_BOTTOM
-          },
-          zoomControl: true,
-          zoomControlOptions: {
-              position: google.maps.ControlPosition.RIGHT_CENTER
-          },
-          scaleControl: true,
-          streetViewControl: true,
-          streetViewControlOptions: {
-              position: google.maps.ControlPosition.RIGHT_TOP
-          }
+        mapTypeControlOptions: {
+            style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+            position: google.maps.ControlPosition.RIGHT_BOTTOM
+        },
+        zoomControl: true,
+        zoomControlOptions: {
+            position: google.maps.ControlPosition.RIGHT_CENTER
+        },
+        scaleControl: true,
+        streetViewControl: true,
+        streetViewControlOptions: {
+            position: google.maps.ControlPosition.RIGHT_TOP
+        }
     });
 
     // zoom out for mobile screens, zoom in for larger screens
@@ -98,54 +153,12 @@ function initMap() {
         calculateCenter();
     });
 
-    // add markers to the map
-    initLocations.forEach( function( loc ) {
-
-        var marker = new google.maps.Marker( {
-            animation: google.maps.Animation.DROP,
-            position: loc.coordinates,
-            title: loc.name,
-            map: map
-        });
-
-        markers.push(marker);
-
-        // Add info window to marker
-        var contentString = "<div class='content'>" +
-            "<h4><a target='_blank' href='" + loc.url + "'>" + loc.name + "</a></h4>" +
-            "<p>" + loc.address + "</p>" +
-            "</div>"
-
-        var infowindow = new google.maps.InfoWindow({
-            content: contentString
-        });
-
-        infoWindows.push(infowindow);
-
-        // bouncing marker
-        // https://developers.google.com/maps/documentation/javascript/markers
-        marker.addListener('click', function( ) {
-            this.setAnimation(google.maps.Animation.BOUNCE);
-        });
-
-        marker.addListener('click', function() {
-            infowindow.open(map, this);
-        });
-    });
-
-    // stop marker animation and close infowindows on any click
-    document.onclick = function() {
-        markers.forEach( function ( marker ) {
-            marker.setAnimation(null);
-        });
-        infoWindows.forEach( function( infowindow ) {
-            infowindow.close(map, this);
-        });
-    };
+    addMarkers();
 };
 
 
-
+console.log("length of markers: " + markers.length);
+console.log("length of markers: " + infoWindows.length);
 
 
 
