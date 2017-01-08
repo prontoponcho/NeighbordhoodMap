@@ -1,6 +1,7 @@
 /* Optional: Makes the sample page fill the window. */
 html, body, .container {
     height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
 }
@@ -33,7 +34,7 @@ h1 {
 
 #list-header {
     background-color: black;
-    height: 40px;
+    height: 50px;
 }
 
 .container {
@@ -41,6 +42,32 @@ h1 {
     flex-direction: column;
     flex-wrap: nowrap;
     align-content: stretch;
+}
+
+.right {
+    text-align: right;
+}
+
+#bootstrap-overrides button {
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 28px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 7px;
+    background: #888e91;
+    text-decoration: none;
+    margin: 7px;
+}
+
+#bootstrap-overrides button:hover {
+    background: #b1b5b8;
+    text-decoration: none;
+}
+
+.center {
+    text-align: center;
 }
 
 @media all and (max-width: 767px) {
@@ -58,6 +85,7 @@ h1 {
         position: absolute;
         left: 0px;
         top: 50%;
+        padding: 0px;
     }
 
 }

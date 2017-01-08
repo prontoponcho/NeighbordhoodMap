@@ -57,7 +57,11 @@ var Location = function( data, markers ) {
     this.url = ko.observable( data.url );
     this.viewable = ko.observable( true );
     this.marker = ko.observable( initMarker( data, markers ) );
-    // this.foursquareTip = ko.observable( new FourSquareTip( data.name ));
+    this.recommendation = ko.observable();
+
+    this.getRecommendation = function() {
+        getRecommendedVenue(this);
+    };
 };
 
 var ViewModel = function() {
@@ -68,6 +72,7 @@ var ViewModel = function() {
 
     initLocations.forEach( function( loc ) {
         var location = new Location( loc, self.markers );
+        location.getRecommendation();
         self.locations.push( location );
     });
 

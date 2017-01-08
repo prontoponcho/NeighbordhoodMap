@@ -7,13 +7,13 @@
      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 </head>
-<body>
+<body id="bootstrap-overrides">
 
-    <div id="header"><h1>Header</h1></div>
+    <div id="header"><h1 class='center'>Health on the Hill</h1></div>
 
     <div id="list" class="container">
         <div id="list-header">
-            <div class="btn-group">
+            <div class="btn-group pull-right">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Filter <span class="glyphicon glyphicon-filter"></span>
                 </button>
@@ -35,8 +35,11 @@
                     </div>
                     <div class="panel-collapse collapse" role="tabpanel" data-bind="attr: {id: 'collapse' + $index(), 'aria-labelledby': 'heading' + $index()}, visible: viewable">
                         <div class="panel-body">
-                            <p data-bind="text: 'category: ' + category()"></p>
-                            <a data-bind="attr: {href: url}" target="_blank">website</a>
+                            <p><span data-bind="text: 'category: ' + category()"></span>
+                            &nbsp|&nbsp
+                            <span><a data-bind="attr: {href: url}" target="_blank">website</a></span></p>
+                            <p>popular spots nearby:&nbsp<span data-bind="html: recommendation()"></span></p>
+                            <p class='center'><i>provided by Foursquare</i></p>
                         </div>
                     </div>
                 <!-- /ko -->
@@ -53,6 +56,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/map.js"></script>
+    <script type="text/javascript" src="js/foursquare.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPOJXFTbJh9jn8Mg09QENs5BaEXNgDpw0&callback=initViewModel"
     async defer></script>
 
