@@ -15,7 +15,6 @@ var initMarker = function( loc, markers ) {
         "<p>" + loc.address + "</p>" +
         "</div>";
 
-    // each marker has infowindow
     marker.infowindow = new google.maps.InfoWindow({
         content: contentString
     });
@@ -32,8 +31,7 @@ var addClickEvents = function( marker, markers ) {
     // marker animation
     marker.addListener('click', function( ) {
 
-        // stop all other markers from bouncing
-        // close all other marker infowindows
+        // stop all animations, close all infowindows
         markers.forEach( function ( marker ) {
             marker.setAnimation(null);
             marker.infowindow.close();
@@ -59,6 +57,7 @@ var Location = function( data, markers ) {
     this.url = ko.observable( data.url );
     this.viewable = ko.observable( true );
     this.marker = ko.observable( initMarker( data, markers ) );
+    // this.foursquareTip = ko.observable( new FourSquareTip( data.name ));
 };
 
 var ViewModel = function() {
