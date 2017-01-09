@@ -6,6 +6,7 @@ var initMarker = function( loc, markers ) {
         animation: google.maps.Animation.DROP,
         position: loc.coordinates,
         title: loc.name,
+        icon: 'img/map-marker.png',
         map: map
     });
 
@@ -20,8 +21,6 @@ var initMarker = function( loc, markers ) {
     });
 
     addClickEvents( marker, markers );
-
-    markers.push(marker);
 
     return marker;
 };
@@ -49,19 +48,15 @@ var addClickEvents = function( marker, markers ) {
     });
 };
 
-var Location = function( data, markers ) {
+var Location = function( data ) {
     this.category = ko.observable( data.category );
     this.name = ko.observable( data.name );
     this.address = ko.observable( data.address );
     this.coordinates = ko.observable( data.coordinates );
     this.url = ko.observable( data.url );
     this.viewable = ko.observable( true );
-    this.marker = ko.observable( initMarker( data, markers ) );
-    this.recommendation = ko.observable();
-
-    this.getRecommendation = function() {
-        getRecommendedVenue(this);
-    };
+    this.marker = ko.observable( data.marker );
+    this.recommendation = ko.observable( data.recommendation );
 };
 
 var ViewModel = function() {
@@ -70,9 +65,12 @@ var ViewModel = function() {
     self.locations = ko.observableArray( [] );
     self.markers = [];
 
-    initLocations.forEach( function( loc ) {
-        var location = new Location( loc, self.markers );
-        location.getRecommendation();
+    initLocations.forEach( function( data ) {
+        var marker = initMarker( data, self.markers );
+        self.markers.push( marker );
+        data.marker = marker;
+        var location = new Location( data );
+        setRecommendedVenue( location );
         self.locations.push( location );
     });
 
