@@ -3,8 +3,8 @@
 <head>
     <title>Neighborhood Map</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 </head>
 <body id="bootstrap-overrides">
@@ -35,7 +35,7 @@
                     </div>
                     <div class="panel-collapse collapse" role="tabpanel" data-bind="attr: {id: 'collapse' + $index(), 'aria-labelledby': 'heading' + $index()}, visible: viewable">
                         <div class="panel-body">
-                            <p><span data-bind="text: 'category: ' + category()"></span>
+                            <p><span data-bind="text: 'category: ' + category"></span>
                             &nbsp|&nbsp
                             <span><a data-bind="attr: {href: url}" target="_blank">website</a></span></p>
                             <p>popular spots nearby:&nbsp<span data-bind="html: recommendation()"></span></p>
@@ -54,11 +54,11 @@
     <script src="js/libs/jquery.min.js"></script>
     <script src="js/libs/knockout-3.2.0.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="js/app.js"></script>
-    <script type="text/javascript" src="js/map.js"></script>
-    <script type="text/javascript" src="js/foursquare.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/foursquare.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPOJXFTbJh9jn8Mg09QENs5BaEXNgDpw0&callback=initViewModel"
-    async defer></script>
+    async defer onerror="googleError()"></script>
 
 </body>
 </html>

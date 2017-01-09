@@ -64,6 +64,7 @@ var initLocations = [
     }
 ];
 
+
 // center map solution at:
 // http://stackoverflow.com/questions/8792676/center-google-maps-v3-on-browser-resize-responsive
 var center;
@@ -367,7 +368,7 @@ var addClickEvents = function( marker, markers ) {
     // marker animation
     marker.addListener('click', function( ) {
 
-        // stop all animations, close all infowindows
+        // stop all animations and close all infowindows
         markers.forEach( function ( marker ) {
             marker.setAnimation(null);
             marker.infowindow.close();
@@ -381,10 +382,15 @@ var addClickEvents = function( marker, markers ) {
             marker.setAnimation(null);
         });
 
+        // marker animates for ~4 bounces
         setTimeout(function () { marker.setAnimation(null); }, 2866);
     });
 };
 
+
+var googleError = function() {
+    alert("Error loading Google Map. Try reloading the page.");
+}
 
 
 

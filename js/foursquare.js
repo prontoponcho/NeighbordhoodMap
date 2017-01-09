@@ -11,22 +11,24 @@ var data = {
 	ll: null
 };
 
+
+// Makes AJAX request to Foursquare API for recommened venues
+// near the passed location.
 var setRecommendedVenue = function( location ) {
-	var coords = location.coordinates();
+
+	var coords = location.coordinates;
 	data.ll = coords.lat + ',' + coords.lng;
 
 	$.get(foursquareAPI, data)
 	.done( function( data ) {
 		var name = data.response.groups[0].items[0].venue.name;
 		var url  = 'https://www.google.com/search?q=' + name;
-		console.log(url);
-		var link = $('<a>',{
+		var link = $('<a>', {
 			text: name,
 			title: 'link to external website',
 			target: '_blank',
 			href: url
 		}).prop("outerHTML");
-		console.log(link);
 		location.recommendation(link);
 	})
 	.fail( function() {
